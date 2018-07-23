@@ -1,4 +1,4 @@
-package lec2final;
+package lec2final.movie;
 
 public interface MovieType {
     MovieType REGULAR = new Regular();

@@ -1,4 +1,4 @@
-package lec2final;
+package lec2final.movie;
 
 public class Movie {
     public static final int CHILDRENS = 2;
@@ -29,7 +29,7 @@ public class Movie {
         return getType().rentalCost(daysRented);
     }
 
-    int rentalPoints(int daysRented) {
+    public int rentalPoints(int daysRented) {
         return getType().rentalPoints(daysRented);
     }
 }

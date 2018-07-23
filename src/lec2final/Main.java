@@ -1,9 +1,20 @@
 package lec2final;
 
+import lec2final.customer.Customer;
+import lec2final.movie.Movie;
+import lec2final.movie.MovieType;
+import lec2final.rental.Rental;
+import lec2final.report.HTMLReporter;
+import lec2final.report.Reporter;
+import lec2final.report.TxtReporter;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+    private static Reporter reporter;
+    private static BufferedReader reader;
 
     public static void main(String[] args) {
         List<Movie> movies = new ArrayList<>();
@@ -21,8 +32,28 @@ public class Main {
         customer1.addRental(new Rental(movies.get(5), 1));
         customer1.addRental(new Rental(movies.get(4), 10));
 
-        System.out.println(customer1.statement());
+        while(reporter==null){
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("В каком формате вы хотите получить результат? Варианты: TXT, HTML");
+            String answer = null;
+            while (answer == null){
+                try {
+                    answer = reader.readLine();
+                    if (!answer.equals("TXT")&&!answer.equals("HTML")){
+                        System.out.println("Выберите один из двух вариантов: TXT, HTML");
+                        answer = null;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (answer.equals("TXT")){
+                reporter = new TxtReporter();
+            }else {
+                reporter = new HTMLReporter();
+            }
+        }
+        System.out.println(reporter.processReport(customer1));
 
-        movies.get(5).setType(MovieType.REGULAR);
     }
 }

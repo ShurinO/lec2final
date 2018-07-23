@@ -1,4 +1,6 @@
-package lec2final;
+package lec2final.rental;
+
+import lec2final.movie.Movie;
 
 public class Rental {
     private Movie _movie;
